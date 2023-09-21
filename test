@@ -1,0 +1,55 @@
+#Tạo 1 class nhân viên gồm các thuộc tính: tên nhân viên, số năm công tác, hệ số lương.
+# Phương thức tính lương
+# - Nhập 1 list gồm n nhân viên
+# - In danh sách vừa nhập
+# - Sắp xếp danh sách theo thứ tự giảm dần của lương
+# - In danh sách những nhân viên đủ điều kiện về hưu (số năm công tác >=25)
+class Nhanvien():
+    def __init__(self,ten,sonam,hsluong):
+        self.ten=ten
+        self.sonam=sonam
+        self.hsluong=hsluong
+    def luong(self):
+        return self.sonam*self.hsluong
+def nhap_ds(n):
+    ds=[]
+    for i in range(n):
+        print("Nhân viên thứ",i+1)
+        ten=input("Tên: ")
+        sonam=float(input("Số năm công tác: "))
+        while sonam<0:
+            print("Số năm không hợp lệ")
+            sonam=float(input("Số năm công tác: "))
+        hsluong=float(input("Hệ số lương: "))
+        while hsluong<0:
+            print("Hệ số lương không hợp lệ!")
+            hsluong=float(input("Hệ số lương: "))
+        ds.append(Nhanvien(ten,sonam,hsluong))
+    print()
+    return ds
+def in_ds(ds):
+    for i in ds:
+        print(f"Tên: {i.ten} - Số năm công tác: {i.sonam} - Hs luơng: {i.hsluong} - Lương: {i.luong()}")
+n=int(input("Nhập số lượng: "))
+while n<0:
+    print("Số luojnsg không hợp lệ!")
+    n=int(input("Nhập lại số lượng: "))
+a=nhap_ds(n)
+print("Danh sách")
+in_ds(a)
+
+def sx_giam_luong(ds):
+    ds.sort(key=lambda x : x.luong(),reverse=True)
+    return ds
+ds=sx_giam_luong(a)
+print()
+print("Danh sách giảm dần lương")
+in_ds(ds)
+
+def ve_huu(ds):
+    ds=[i for i in ds if i.sonam >=25]
+    return ds
+b=ve_huu(ds)
+print()
+print("Danh sách những người được về hưu")
+in_ds(b)
